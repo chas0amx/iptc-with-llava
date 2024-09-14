@@ -35,3 +35,14 @@ The following prompt generates keywords from the following image:
 LlaVA 1.6 generates the following keywords:
 
 ![](iptc-keywords-photometaedit.png)
+
+## Run with docker
+brew services start ollama
+
+docker build -t image-to-iptc .
+
+docker run --network="host" \
+           -v $(pwd)/image-to-iptc.py:/app/image-to-iptc.py \
+           -v $(pwd)/img_output:/app/img_output \
+           -v $(pwd)/img_source:/app/img_source -e PYTHONUNBUFFERED=1 \
+           image-to-iptc python3 /app/image-to-iptc.py
